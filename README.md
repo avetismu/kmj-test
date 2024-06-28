@@ -21,6 +21,10 @@ $ npm install
 
 ### Launching Server / Lancement du Serveur
 
+The server is configured to launch on port ```8000```.
+
+Le server est configuré au port  ```8000```.
+
 ```bash
 # development
 $ npm run start
@@ -44,3 +48,11 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+
+### Swagger 
+
+Swagger docs are accessible at ```/api/v1.0/docs``` once the server is launched.
+
+La documentation swagger peut être accèdé à ```/api/v1.0/docs```, une fois que le serveur est lancé.
+
+Locally / Localement: http://localhost:8000/api/v1.0/docs.
