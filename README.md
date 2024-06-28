@@ -2,6 +2,7 @@
 
 ## Database /  Base de Données
 ### Database Architecture Diagram / Architecture de la Base de Données
+![Alt text](docs/kmj-test-db-diagram.png)
 ### Database Connection / Connexion à la Base de Données
 
 
