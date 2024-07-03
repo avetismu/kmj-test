@@ -1,7 +1,12 @@
 import { DataSource } from 'typeorm';
 import { config } from 'dotenv';
 
-config();
+config({path : './.development.env'});
+
+console.log('process.env.DB_HOST', process.env.DB_HOST);
+console.log('process.env.DB_PORT', process.env.DB_PORT);
+console.log('process.env.DB_USERNAME', process.env.DB_USERNAME);
+
 
 export const databaseProviders = [
   {
@@ -18,6 +23,7 @@ export const databaseProviders = [
             __dirname + '/../**/*.entity{.ts,.js}',
         ],
         synchronize: true,
+        //logging: true,
       });
 
       return dataSource.initialize();
