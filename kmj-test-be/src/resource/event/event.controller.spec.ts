@@ -2,14 +2,17 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { EventController } from './event.controller';
 import { EventService } from './event.service';
 import { Timezone } from './utils/enum.utils';
+import { EventProviders } from './event.providers';
+import { DatabaseModule } from '../../config/database.module';
 
 describe('EventController', () => {
   let controller: EventController;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
+      imports: [DatabaseModule],
       controllers: [EventController],
-      providers: [EventService],
+      providers: [...EventProviders, EventService],
     }).compile();
 
     controller = module.get<EventController>(EventController);
