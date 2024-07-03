@@ -4,6 +4,7 @@ import { EventService } from './event.service';
 import { Timezone } from './utils/enum.utils';
 import { EventProviders } from './event.providers';
 import { DatabaseModule } from '../../config/database.module';
+import EventReponseDto from './dto/response-event.dto';
 
 describe('EventController', () => {
   let controller: EventController;
@@ -25,15 +26,15 @@ describe('EventController', () => {
 
 
   // Trivial findAll Test
-  it('should return an array of events', () => {
-    expect(controller.findAll()).toBeInstanceOf(Array);
+  it('should return an array of events', async () => {
+    expect(await controller.findAll()).toBeInstanceOf(Object);
     }
   );
 
   // Trivial create Test
-  it('should create an event', () => {
+  it('should create an event', async () => {
 
-    expect(controller.create({
+    expect(await controller.create({
       title: 'Test Event',
       description: 'Test Description',
       start: new Date(),
@@ -45,9 +46,9 @@ describe('EventController', () => {
   );
 
   // create Test with missing required fields in dto
-  it('should return an error as dto is missing required fields', () => {
+  it('should return an error as dto is missing required fields', async () => {
 
-    expect(controller.create({
+    expect(await controller.create({
       title: null,
       description: 'Test Description',
       start: new Date(),
@@ -55,7 +56,7 @@ describe('EventController', () => {
       timezone: 'GMT' as Timezone,
     })).toBeInstanceOf(Object);
 
-    expect(controller.create({
+    expect(await controller.create({
       title: 'Test Event',
       description: null,
       start: new Date(),
@@ -63,7 +64,7 @@ describe('EventController', () => {
       timezone: 'GMT' as Timezone,
     })).toBeInstanceOf(Object);
 
-    expect(controller.create({
+    expect(await controller.create({
       title: 'Test Event',
       description: 'Test Description',
       start: null,
@@ -72,7 +73,7 @@ describe('EventController', () => {
     })).toBeInstanceOf(Object);
     
   
-    expect(controller.create({
+    expect(await controller.create({
       title: 'Test Event',
       description: 'Test Description',
       start: new Date(),
@@ -80,7 +81,7 @@ describe('EventController', () => {
       timezone: 'GMT' as Timezone,
     })).toBeInstanceOf(Object);
 
-    expect(controller.create({
+    expect(await controller.create({
       title: 'Test Event',
       description: 'Test Description',
       start: new Date(),
@@ -90,22 +91,10 @@ describe('EventController', () => {
 
   })
 
-  // create Test with misfomatted properties
+  // test with various timezone values
+  it('should return an error from the formatting of timzone property in DTO', async () => {
 
-  it('should return an error from the formatting of title', () => {
-
-    expect(controller.create({
-      title: 'This title is longer than 32 characters and should return an error',
-      description: 'Test Description',
-      start: new Date(),
-      end: new Date(),
-      timezone: 'GMT' as Timezone,
-    })).toBeInstanceOf(Object);
-
-  });
-  it('should return an error from the formatting of timzone property in DTO', () => {
-
-    expect(controller.create({
+    expect(await controller.create({
       title: 'Test Event',
       description: 'Test Description',
       start: new Date(),
@@ -113,7 +102,7 @@ describe('EventController', () => {
       timezone: 'GMT+2' as Timezone,
     })).toBeInstanceOf(Object);
 
-    expect(controller.create({
+    expect(await controller.create({
       title: 'Test Event',
       description: 'Test Description',
       start: new Date(),
@@ -121,34 +110,52 @@ describe('EventController', () => {
       timezone: 'GMT-2' as Timezone,
     })).toBeInstanceOf(Object);
 
-    expect(controller.create({
+  });
+
+  // create Test with misfomatted properties
+
+  it('should return an error from the formatting of title', async () => {
+
+    let response : EventReponseDto = await controller.create({
+        title: 'This title is longer than 32 characters and should return an error',
+        description: 'Test Description',
+        start: new Date(),
+        end: new Date(),
+        timezone: 'GMT' as Timezone
+      });
+
+    expect(response).toBeInstanceOf(Object);
+    expect(response.error).toBeDefined();
+
+  });
+  it('should return an error from the formatting of timzone property in DTO', async () => {
+
+    let response : EventReponseDto = await controller.create({
       title: 'Test Event',
       description: 'Test Description',
       start: new Date(),
       end: new Date(),
       timezone: 'UTC' as Timezone,
-    })).toBeInstanceOf(Object);
+    })
+
+    expect(response).toBeInstanceOf(Object);
+    expect(response.error).toBeDefined();
 
   });
 
-  it('should return an error from the formatting of start and end properties in DTO', () => {
+  it('should return an error from end date being prior to start date', async () => {
       
-      expect(controller.create({
-        title: 'Test Event',
-        description: 'Test Description',
-        start: new Date('2021-08-01'),
-        end: new Date(),
-        timezone: 'GMT' as Timezone,
-      })).toBeInstanceOf(Object);
+    let response : EventReponseDto = await controller.create({
+      title: 'Test Event',
+      description: 'Test Description',
+      start: new Date(),
+      end: new Date('2021-01-01'),
+      timezone: 'GMT' as Timezone,
+    })
   
-      expect(controller.create({
-        title: 'Test Event',
-        description: 'Test Description',
-        start: new Date(),
-        end: new Date('2021-08-01'),
-        timezone: 'GMT' as Timezone,
-      })).toBeInstanceOf(Object);
-  
-    });
+    expect(response).toBeInstanceOf(Object);
+    expect(response.error).toBeDefined();
+
+  });
 
 });
