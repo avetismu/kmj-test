@@ -62,7 +62,7 @@ const addEventSlice = createSlice({
           })
           .addCase(createEvent.rejected, (state, action) => {
             state.postEventState = API_STATE.ERROR;
-            state.postEventError = action.payload as string|| 'An error occurred'; 
+            state.postEventError = "Échec de la création de l'Événement";
           });
       },
 });
