@@ -1,6 +1,8 @@
 # compiled output
 /kmj-test-be/dist
 /kmj-test-be/node_modules
+/kmj-test-fe/dist
+/kmj-test-fe/node_modules
 
 # Logs
 logs

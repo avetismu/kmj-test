@@ -20,11 +20,28 @@ DB_PASSWORD=
 DB_NAME=kmj-test
 ```
 
-
-
 ## Client / Client
+### Installation / Installation
+
+```bash
+$ npm install
+```
+
 ### Launching Client / Lancement du Client
+
+The client is configured to launch on port ```3000```.
+
+Le client est configuré au port  ```3000```.
+
+```bash
+$ npm start 
+```
+
 ### Running Client Tests / Exécution des Tests du Client
+
+```bash
+npm test
+```
 
 
 ## Server / Serveur
