@@ -8,7 +8,7 @@ export class Event {
     @PrimaryGeneratedColumn('uuid')
     uuid: UUID;
 
-    @Column('varchar', {name: 'title', length: 255, nullable : false})
+    @Column('varchar', {name: 'title', length: 32, nullable : false})
     title: string;
 
     @Column('text', {name: 'description', nullable : false})

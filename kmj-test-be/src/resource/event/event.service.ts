@@ -3,6 +3,8 @@ import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
 import { Event } from './entities/event.entity';
 import { Repository } from 'typeorm';
+import { plainToClass } from 'class-transformer';
+import { UUID } from 'crypto';
 
 @Injectable()
 export class EventService {
@@ -14,23 +16,34 @@ export class EventService {
     
   }
   
-  create(createEventDto: CreateEventDto) {
-    return 'This action adds a new event';
+  async create(createEventDto: CreateEventDto) {
+    const newEvent = plainToClass(Event, createEventDto);
+
+    // Validation Logic
+    if (newEvent.title.length > 32) {
+      throw new Error('Title is longer than 32 characters');
+    }
+
+    if (newEvent.start > newEvent.end) {
+      throw new Error('Start date is after end date');
+    }
+
+    return this.eventRepository.save(newEvent);
   }
 
-  findAll() {
+  async findAll() {
     return this.eventRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} event`;
+  async findOne(id: UUID) {
+    return this.eventRepository.findOne({where: {uuid: id}});
   }
 
-  update(id: number, updateEventDto: UpdateEventDto) {
-    return `This action updates a #${id} event`;
+  async update(id: number, updateEventDto: UpdateEventDto) {
+    return `This action updates a #${id} event`; //TODO
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} event`;
+  async remove(id: number) {
+    return `This action removes a #${id} event`; //TODO
   }
 }
