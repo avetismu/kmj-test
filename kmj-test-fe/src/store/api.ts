@@ -3,6 +3,7 @@ import axios from 'axios';
 const BASE_URL = process.env.REACT_APP_API;
 
 const GET_ALL_EVENTS = '/event';
+const POST_EVENT = '/event';
 
 export const enum API_STATE {
     LOADING = 'loading',
@@ -21,5 +22,14 @@ export const getAllEventsAsync = async () => {
         return response.data;
     } catch (error) {
         throw new Error('Failed to fetch all events.');
+    }
+}
+
+export const postEventAsync = async (event : any) => {
+    try {
+        const response = await userAPI.post(POST_EVENT, event);
+        return response.data;
+    } catch (error) {
+        throw new Error('Failed to post event.');
     }
 }

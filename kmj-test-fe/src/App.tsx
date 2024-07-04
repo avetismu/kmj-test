@@ -5,7 +5,7 @@ import { BrowserRouter, RouterProvider } from 'react-router-dom';
 import router from './routes/router';
 import { Provider } from 'react-redux';
 import store from './store/store';
-import { AppBar, Toolbar, Typography } from '@mui/material';
+import { AppBar, Container, Toolbar, Typography } from '@mui/material';
 
 function App() {
   return (
@@ -19,7 +19,9 @@ function App() {
                   </Typography>
               </Toolbar>
           </AppBar>
-          <RouterProvider router={router}/>
+          <Container sx={{position : "fixed", top : "100px"}}>
+            <RouterProvider router={router}/>
+          </Container>
           </header>
       </div>
     </Provider>
