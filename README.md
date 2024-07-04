@@ -1,4 +1,4 @@
-# Kumojin Event Manager / Gestionnaire d'Évènement Kumojin
+# Kumojin Event Manager / Gestionnaire d'Événement Kumojin
 
 ## Database /  Base de Données
 ### Database Architecture Diagram / Architecture de la Base de Données
@@ -89,3 +89,24 @@ Swagger docs are accessible at ```/api/v1.0/docs``` once the server is launched.
 La documentation swagger peut être accèdé à ```/api/v1.0/docs```, une fois que le serveur est lancé.
 
 Locally / Localement: http://localhost:8000/api/v1.0/docs.
+
+## Notes / Annotations 
+
+### Décision sur la proprieté ```timezone```
+
+J'ai fais la décision d'inclure une proprieté enum ```timezone``` même si le fuseau horaire de l'événement est déjà accessible à partir du ```start``` et ```end``` qui sont du type ```timestampz```. L'idée était de permettre à l'utilisateur de préciser le fuseau horaire de l'événement indépendament de sa position géographique actuelle dans un format lisible. L'enum peut facilement être modifié et formatté comme les fuseaux horaire de Google Calendar:
+
+![Google Calendar](docs/gcalendar.png)
+
+Lors de ce modification, ```timestampz``` devrait être converti en ```timestamp```.
+
+### Obstacles par rapport aux Test Unitaires avec React et Redux
+
+Les tests du projet client en React souffrent d'une paucité de tests unitaires. J'ai rencontré des difficulté avec l'intégration entre la bibliothèque de test ```testing-library/react``` et les dépendances de ```react-redux```. À cause des contraintes de temps, j'ai du gardé l'ampleur de ces tests au moindre possible mais dans le cas contraire, j'aurais augmenté l'étendu des fonctionalités testés.
+
+
+
+
+
+
+
