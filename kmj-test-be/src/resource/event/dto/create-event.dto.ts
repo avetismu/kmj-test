@@ -1,6 +1,6 @@
 import { IsString, IsNotEmpty, IsDate, IsEnum } from 'class-validator';
 import { ApiProperty } from "@nestjs/swagger";
-import { Timezone } from '../utils/enum.utils';
+import { Timezone } from '../../../utils/enum.utils';
 
 export class CreateEventDto {
     @ApiProperty({type: String, nullable:false, default: 'Event Name', description: 'Title of the event'})

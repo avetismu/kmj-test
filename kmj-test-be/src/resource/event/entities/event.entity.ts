@@ -1,6 +1,6 @@
 import { UUID } from "crypto";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import { Timezone } from "../utils/enum.utils";
+import { Timezone } from "../../../utils/enum.utils";
 
 @Entity('event')
 export class Event {
