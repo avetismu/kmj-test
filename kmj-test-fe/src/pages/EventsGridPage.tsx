@@ -11,7 +11,7 @@ const EventsGridPage: React.FC = () => {
         return (
                 <Container>
                         <Typography variant="h5" align="left" gutterBottom>
-                                Évènements
+                                Événements
                         </Typography>
                         <Grid container sx={{marginBottom : 2}}>
                                 <Grid md={6}>

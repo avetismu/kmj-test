@@ -98,7 +98,7 @@ J'ai fais la décision d'inclure une proprieté enum ```timezone``` même si le 
 
 ![Google Calendar](docs/gcalendar.png)
 
-Lors de ce modification, ```timestampz``` devrait être converti en ```timestamp```.
+Lors de cette modification, ```timestampz``` devrait être converti en ```timestamp```.
 
 ### Obstacles par rapport aux Test Unitaires avec React et Redux
 
