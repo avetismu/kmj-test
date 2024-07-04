@@ -33,19 +33,22 @@ describe('EventService', () => {
     expect(service).toBeDefined();
   });
 
-  // Trivial findAll Test
-  it('should return an array of events', async () => {
-    expect(await service.findAll()).toBeInstanceOf(Object);
-    }
-  );
-
   // Trivial create Test
   it('should create an event', async () => {
     expect(await service.create(eventData)).toBeInstanceOf(Object);
     }
   );
 
-  // trivial findOne Test
+  // Trivial findAll Test
+  it('should return an array of events', async () => {
+    let events = await service.findAll();
+
+    expect(events).toBeInstanceOf(Array);
+
+    }
+  );
+
+  // Trivial findOne Test
   it('should return an event', async () => {
     let event = await service.create(eventData);
 

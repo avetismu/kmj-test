@@ -34,81 +34,113 @@ describe('EventController', () => {
   // Trivial create Test
   it('should create an event', async () => {
 
-    expect(await controller.create({
+    let response : EventReponseDto = await controller.create({
       title: 'Test Event',
       description: 'Test Description',
       start: new Date(),
       end: new Date(),
       timezone: 'GMT' as Timezone,
-    })).toBeInstanceOf(Object);
-    }
+    });
 
+    expect(response.data).toBeDefined();
+    expect(response.data.uuid).toBeDefined();
+    expect(response.data.title).toBe('Test Event');
+    expect(response.data.description).toBe('Test Description');
+    expect(response.data.start).toBeDefined();
+    expect(response.data.end).toBeDefined();
+    expect(response.data.timezone).toBe('GMT');
+    
+    }
   );
 
-  // create Test with missing required fields in dto
-  it('should return an error as dto is missing required fields', async () => {
+  // create Test with missing required properties in dto
+  it('should return an error as dto is missing required properties', async () => {
 
-    expect(await controller.create({
+    let responseMissingTitle = await controller.create({
       title: null,
       description: 'Test Description',
       start: new Date(),
       end: new Date(),
       timezone: 'GMT' as Timezone,
-    })).toBeInstanceOf(Object);
+    });
 
-    expect(await controller.create({
+    expect(responseMissingTitle.error).toBeDefined();
+    expect(responseMissingTitle.error.description).toBe("Cannot read properties of null (reading 'length')");
+
+    let responseMissingDescription = await controller.create({
       title: 'Test Event',
       description: null,
       start: new Date(),
       end: new Date(),
       timezone: 'GMT' as Timezone,
-    })).toBeInstanceOf(Object);
+    });
 
-    expect(await controller.create({
+    expect(responseMissingTitle.error).toBeDefined();
+    expect(responseMissingTitle.error.description).toBe("Cannot read properties of null (reading 'length')");
+
+    let responseMissingStart = await controller.create({
       title: 'Test Event',
       description: 'Test Description',
       start: null,
       end: new Date(),
       timezone: 'GMT' as Timezone,
-    })).toBeInstanceOf(Object);
+    })
+
+    expect(responseMissingStart.error).toBeDefined();
+    expect(responseMissingStart.error.description).toBe("null value in column \"start\" of relation \"event\" violates not-null constraint");
     
   
-    expect(await controller.create({
+    let responseMissingEnd = await controller.create({
       title: 'Test Event',
       description: 'Test Description',
       start: new Date(),
       end: null,
       timezone: 'GMT' as Timezone,
-    })).toBeInstanceOf(Object);
+    })
 
-    expect(await controller.create({
+    expect(responseMissingEnd.error).toBeDefined();
+    expect(responseMissingEnd.error.description).toBe("Start date is after end date");
+
+
+   let responseMissingGMT =  await controller.create({
       title: 'Test Event',
       description: 'Test Description',
       start: new Date(),
       end: new Date(),
       timezone: null,
-    })).toBeInstanceOf(Object);
+    })
+
+    expect(responseMissingGMT.error).toBeDefined();
+    expect(responseMissingGMT.error.description).toBe("null value in column \"timezone\" of relation \"event\" violates not-null constraint");
 
   })
 
   // create Test with various timezone values
-  it('should return an error from the formatting of timzone property in DTO', async () => {
+  it('should accept events with varying timezones', async () => {
 
-    expect(await controller.create({
+    let responsePositiveGMT2 : EventReponseDto = await controller.create({
       title: 'Test Event',
       description: 'Test Description',
       start: new Date(),
       end: new Date(),
       timezone: 'GMT+2' as Timezone,
-    })).toBeInstanceOf(Object);
+    });
 
-    expect(await controller.create({
+    expect(responsePositiveGMT2).toBeDefined();
+    expect(responsePositiveGMT2.data).toBeInstanceOf(Object);
+    expect(responsePositiveGMT2.data.timezone).toBe('GMT+2');
+
+    let responseNegativeGMT2 : EventReponseDto = await controller.create({
       title: 'Test Event',
       description: 'Test Description',
       start: new Date(),
       end: new Date(),
       timezone: 'GMT-2' as Timezone,
-    })).toBeInstanceOf(Object);
+    });
+
+    expect(responseNegativeGMT2).toBeDefined();
+    expect(responseNegativeGMT2.data).toBeInstanceOf(Object);
+    expect(responseNegativeGMT2.data.timezone).toBe('GMT-2');
 
   });
 
@@ -128,6 +160,7 @@ describe('EventController', () => {
     expect(response.error).toBeDefined();
 
   });
+
   it('should return an error from the formatting of timzone property in DTO', async () => {
 
     let response : EventReponseDto = await controller.create({
@@ -178,7 +211,7 @@ describe('EventController', () => {
 
   // findOne Test with non-existent uuid
   it('should return an error as uuid does not exist', async () => {
-    let response = await controller.findOne('12345678-1234-1234-1234');
+    let response = await controller.findOne('12345678-1234-1234-1234-123456789012');
 
     expect(response).toBeInstanceOf(Object);
     expect(response.error).toBeDefined();

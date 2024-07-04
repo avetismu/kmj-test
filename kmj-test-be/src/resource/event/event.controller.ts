@@ -53,6 +53,11 @@ export class EventController {
   async findOne(@Param('id') id: string) {
     try{
       const event = await this.eventService.findOne(id as UUID);
+
+      if(event == null) {
+        throw new Error('Event not found');
+      }
+
       return {
         data: event
       } as EventReponseDto

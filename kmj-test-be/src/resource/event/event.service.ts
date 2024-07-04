@@ -12,9 +12,7 @@ export class EventService {
   constructor(
     @Inject('EVENT_REPOSITORY')
     private eventRepository: Repository<Event>,
-  ) {
-    
-  }
+  ) {}
   
   async create(createEventDto: CreateEventDto) {
     const newEvent = plainToClass(Event, createEventDto);
