@@ -1,9 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
+import EventsGridPage from "../pages/EventsGridPage";
 
 const Router = createBrowserRouter([
     {
       path: "/",
-      element: <h2>Hellow World</h2>,
+      element: <EventsGridPage />
     },
   ]);
 
