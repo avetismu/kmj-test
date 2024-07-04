@@ -17,7 +17,7 @@ const EventsAddPage: React.FC = () => {
             <IconButton aria-label="back-button" href='/' onClick={() => {dispatch(resetAddNewEventForm())}}>
                 <ArrowBackIcon />
             </IconButton>
-                Créer un Évènement
+                Créer un Événement
             </Typography>
             <Grid container sx={{marginTop : 2}}>
                 <EventsAddComponent/>

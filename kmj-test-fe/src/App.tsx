@@ -13,7 +13,7 @@ function App() {
             <AppBar position="fixed" sx={{zIndex: (theme) => theme.zIndex.drawer + 1 }}>
               <Toolbar>
                   <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} align="left">
-                    Gestionnaire d'Évènement Kumojin
+                    Gestionnaire d'Événement Kumojin
                   </Typography>
               </Toolbar>
           </AppBar>

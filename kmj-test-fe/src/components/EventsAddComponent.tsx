@@ -40,7 +40,7 @@ const EventsAddComponent: React.FC = () => {
         <Grid container>
             {selector.postEventState === API_STATE.SUCCESS && 
             <Grid sx={{width : "100%"}}>
-                    <Alert className="modal-alert" severity="success">Creation d'Évènement Réussi!</Alert>
+                    <Alert className="modal-alert" severity="success">Creation d'Événement Réussi!</Alert>
             </Grid>}
             {selector.postEventState === API_STATE.ERROR && 
             <Grid sx={{width : "100%"}}>
@@ -49,7 +49,7 @@ const EventsAddComponent: React.FC = () => {
             <Grid container className="form-row">
                 <Grid md={6}>
                     <TextField
-                        label="Titre"
+                        label="Nom"
                         sx={{width : "95%", float : "left"}}
                         onChange={(value) => {
                             dispatch(setAddNewEventForm({title : value.target.value}));
