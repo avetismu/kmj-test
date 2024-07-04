@@ -18,13 +18,13 @@ const EventsGridPage: React.FC = () => {
                                 </Grid>
                                 <Grid md={6}>
                                         <Grid container justifyContent="end" >
-                                                <Button variant="outlined" href="/new">Créer un Évènement</Button>
+                                                <Button variant="outlined" href="/new">Créer un Événement</Button>
                                         </Grid>
                                 </Grid>
                         </Grid>
                         {selector.getAllEventsState === API_STATE.ERROR && 
                         <Grid sx={{marginBottom : 2}}>
-                                <Alert className="modal-alert" severity="error">Une erreur est survenue lors du chargement des Évènements</Alert>
+                                <Alert className="modal-alert" severity="error">Une erreur est survenue lors du chargement des Événements</Alert>
                         </Grid>}
 
                         <EventsGridComponent/>

@@ -25,7 +25,7 @@ const EventsGridComponent: React.FC = () => {
     const columns: GridColDef[] = [
         {
           field: 'title',
-          headerName: 'Titre',
+          headerName: 'Nom',
           description: 'title',
           sortable: true,
           minWidth: 160
