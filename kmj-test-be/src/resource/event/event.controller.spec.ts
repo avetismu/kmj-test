@@ -91,7 +91,7 @@ describe('EventController', () => {
 
   })
 
-  // test with various timezone values
+  // create Test with various timezone values
   it('should return an error from the formatting of timzone property in DTO', async () => {
 
     expect(await controller.create({
@@ -157,5 +157,34 @@ describe('EventController', () => {
     expect(response.error).toBeDefined();
 
   });
+
+  // findOne travial  Test
+  it('should return an event that was found by uuid', async () => {
+    let response : EventReponseDto= await controller.create({
+      title: 'Test Event',
+      description: 'Test Description',
+      start: new Date(),
+      end: new Date(),
+      timezone: 'GMT' as Timezone,
+    });
+
+    let foundEvent = await controller.findOne(response.data.uuid);
+
+    expect(foundEvent).toBeInstanceOf(Object);
+    expect(foundEvent.data).toBeDefined();
+    expect(foundEvent.data.uuid).toBe(response.data.uuid);
+
+  })
+
+  // findOne Test with non-existent uuid
+  it('should return an error as uuid does not exist', async () => {
+    let response = await controller.findOne('12345678-1234-1234-1234');
+
+    expect(response).toBeInstanceOf(Object);
+    expect(response.error).toBeDefined();
+
+  })
+
+
 
 });

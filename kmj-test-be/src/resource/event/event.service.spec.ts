@@ -4,6 +4,7 @@ import { time } from 'console';
 import { Timezone } from './utils/enum.utils';
 import { EventProviders } from './event.providers';
 import { DatabaseModule } from '../../config/database.module';
+import EventReponseDto from './dto/response-event.dto';
 
 describe('EventService', () => {
   let service: EventService;
@@ -41,6 +42,18 @@ describe('EventService', () => {
   // Trivial create Test
   it('should create an event', async () => {
     expect(await service.create(eventData)).toBeInstanceOf(Object);
+    }
+  );
+
+  // trivial findOne Test
+  it('should return an event', async () => {
+    let event = await service.create(eventData);
+
+    let foundEvent = await service.findOne(event.uuid);
+
+    expect(event).toBeInstanceOf(Object);
+    expect(event.uuid).toBe(foundEvent.uuid);
+
     }
   );
 
