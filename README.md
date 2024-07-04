@@ -3,7 +3,23 @@
 ## Database /  Base de Données
 ### Database Architecture Diagram / Architecture de la Base de Données
 ![DB Diagram](docs/kmj-test-db-diagram.png)
+
 ### Database Connection / Connexion à la Base de Données
+
+The Database is a PostgreSQL database which is configured in ```/src/config```. I've added environment variables in the ```./development.env``` file to simplify connection in this test project. Note that no ```.env``` should be committed to repository in a real project.
+
+La base de données est une base de données PostgreSQL qui est configurée dans ```/src/config```. J'ai ajouté des variables d'environnement dans le fichier ```./development.env``` pour simplifier la connexion dans ce projet de test. Notez qu'aucun fichier ```.env``` ne doit ajouté au repository dans un vrai projet.
+
+The ```.development.env``` connection parameters are as follows / Les paramètres de connexion ```.development.env``` sont les suivants:
+
+```bash
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_USERNAME=postgres
+DB_PASSWORD=
+DB_NAME=kmj-test
+```
+
 
 
 ## Client / Client
