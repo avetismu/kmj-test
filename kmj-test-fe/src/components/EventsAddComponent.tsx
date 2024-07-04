@@ -120,6 +120,7 @@ const EventsAddComponent: React.FC = () => {
                             <MenuItem value='GMT+10'>GMT+10</MenuItem>
                             <MenuItem value='GMT+11'>GMT+11</MenuItem>
                             <MenuItem value='GMT+12'>GMT+12</MenuItem>
+                            <MenuItem value='GMT'>GMT</MenuItem>
                             <MenuItem value='GMT-1'>GMT-1</MenuItem>
                             <MenuItem value='GMT-2'>GMT-2</MenuItem>
                             <MenuItem value='GMT-3'>GMT-3</MenuItem>
