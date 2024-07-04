@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { EventService } from './event.service';
 import { time } from 'console';
-import { Timezone } from './utils/enum.utils';
+import { Timezone } from '../../utils/enum.utils';
 import { EventProviders } from './event.providers';
 import { DatabaseModule } from '../../config/database.module';
 import EventReponseDto from './dto/response-event.dto';

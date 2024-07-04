@@ -4,8 +4,9 @@ import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
 import EventReponseDto, { ERROR_CODE } from './dto/response-event.dto';
 import { UUID } from 'crypto';
+import { API_VERSION } from 'src/utils/app.constants.utils';
 
-@Controller('event')
+@Controller(API_VERSION + 'event')
 export class EventController {
   constructor(private readonly eventService: EventService) {}
 
