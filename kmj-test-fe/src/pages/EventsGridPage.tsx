@@ -24,7 +24,7 @@ const EventsGridPage: React.FC = () => {
                         </Grid>
                         {selector.getAllEventsState === API_STATE.ERROR && 
                         <Grid sx={{marginBottom : 2}}>
-                                <Alert className="modal-alert" severity="error">Une erreur est survenu lors du chargement des Évènements</Alert>
+                                <Alert className="modal-alert" severity="error">Une erreur est survenue lors du chargement des Évènements</Alert>
                         </Grid>}
 
                         <EventsGridComponent/>
