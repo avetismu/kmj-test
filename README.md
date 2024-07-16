@@ -94,7 +94,7 @@ Locally / Localement: http://localhost:8000/api/v1.0/docs.
 
 ### Décision sur la proprieté ```timezone```
 
-J'ai fais la décision d'inclure une proprieté enum ```timezone``` même si le fuseau horaire de l'événement est déjà accessible à partir du ```start``` et ```end``` qui sont du type ```timestampz```. L'idée était de permettre à l'utilisateur de préciser le fuseau horaire de l'événement indépendament de sa position géographique actuelle dans un format lisible. L'enum peut facilement être modifié et formatté comme les fuseaux horaire de Google Calendar:
+J'ai fais la décision d'inclure une proprieté enum ```timezone``` même si ```start``` et ```end``` qui sont du type ```timestampz``` sont converti à leurs valeurs correspondante en UTC. L'idée était de permettre à l'utilisateur de préciser le fuseau horaire de l'événement indépendament de sa position géographique actuelle dans un format lisible. L'enum peut facilement être modifié et formatté comme les fuseaux horaire de Google Calendar:
 
 ![Google Calendar](docs/gcalendar.png)
 
